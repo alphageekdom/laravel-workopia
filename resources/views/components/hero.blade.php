@@ -1,30 +1,31 @@
-@props(['title' => 'Find Your Dream Job'])
+@props(["title" => "Find Your Dream Job"])
 
 <section
-    class="hero relative bg-cover bg-center bg-no-repeat h-80 flex items-center"
+    class="hero relative flex min-h-[50vh] items-center justify-center bg-cover bg-center bg-no-repeat"
 >
     <div class="overlay"></div>
-    <div class="container mx-auto text-center z-10">
-        <h2 class="text-4xl md:text-5xl text-white font-bold mb-8">
+    <div class="z-10 container mx-auto text-center">
+        <h2 class="mb-8 text-4xl font-bold text-white md:text-5xl">
             {{ $title }}
         </h2>
-        <form class="block mx-5 space-y-2 md:mx-auto md:space-x-2">
+        <form class="mx-5 block space-y-2 md:mx-auto md:space-x-2">
             <input
                 type="text"
                 name="keywords"
                 placeholder="Keywords"
-                class="w-full md:w-72 px-4 py-3 focus:outline-none bg-white"
+                class="w-full bg-white px-4 py-3 focus:outline-none md:w-72"
             />
             <input
                 type="text"
                 name="location"
                 placeholder="Location"
-                class="w-full md:w-72 px-4 py-3 focus:outline-none bg-white"
+                class="w-full bg-white px-4 py-3 focus:outline-none md:w-72"
             />
             <button
-                class="w-full md:w-auto bg-blue-700 hover:bg-blue-600 text-white px-4 py-3 focus:outline-none"
+                class="w-full bg-blue-700 px-4 py-3 text-white hover:bg-blue-600 focus:outline-none md:w-auto"
             >
-                <i class="fa fa-search mr-1"></i> Search
+                <i class="fa fa-search mr-1"></i>
+                Search
             </button>
         </form>
     </div>
