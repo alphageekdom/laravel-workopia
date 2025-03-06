@@ -4,11 +4,14 @@
 
 <div class="rounded-lg bg-white p-4 shadow-md">
     <div class="space-between flex items-center gap-4">
-        <img
-            src="/images/{{ $job->company_logo }}"
-            alt="{{ $job->company_name }}"
-            class="w-14"
-        />
+        @if ($job->company_logo)
+            <img
+                src="/images/{{ $job->company_logo }}"
+                alt="{{ $job->company_name }}"
+                class="w-14"
+            />
+        @endif
+
         <div>
             <h2 class="text-xl font-semibold">{{ $job->title }}</h2>
             <p class="text-sm text-gray-500">{{ $job->job_type }}</p>
@@ -39,10 +42,12 @@
                 </span>
             @endif
         </li>
-        <li class="mb-2">
-            <strong>Tags:</strong>
-            {{ ucwords(str_replace(",", ", ", $job->tags)) }}
-        </li>
+        @if ($job->tags)
+            <li class="mb-2">
+                <strong>Tags:</strong>
+                {{ ucwords(str_replace(",", ", ", $job->tags)) }}
+            </li>
+        @endif
     </ul>
     <a
         href="{{ route("jobs.show", $job->id) }}"
