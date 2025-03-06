@@ -13,6 +13,7 @@
         />
         @vite("resources/css/app.css")
         <link rel="stylesheet" href="{{ asset("css/style.css") }}" />
+        <script src="//unpkg.com/alpinejs" defer></script>
         <title>{{ $title ?? "Workopia | Find & List Jobs" }}</title>
     </head>
 
@@ -35,6 +36,6 @@
 
             {{ $slot }}
         </main>
-        <script src="{{ asset("js/script.js") }}"></script>
+        {{-- <script src="{{ asset("js/script.js") }}"></script> --}}
     </body>
 </html>
