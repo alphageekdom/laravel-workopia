@@ -3,6 +3,11 @@
         {{-- Profile Info Form --}}
         <div class="w-full rounded-lg bg-white p-8 shadow-md">
             <h3 class="mb-4 text-center text-3xl font-bold">Profile Info</h3>
+
+            @if ($user && $user->avatar)
+                <x-avatar :user="$user" />
+            @endif
+
             <form
                 method="POST"
                 action="{{ route("profile.update") }}"
@@ -23,6 +28,12 @@
                     label="Email address"
                     type="email"
                     value="{{$user->email}}"
+                />
+
+                <x-inputs.file
+                    id="avatar"
+                    name="avatar"
+                    label="Upload Avatar"
                 />
 
                 <button
