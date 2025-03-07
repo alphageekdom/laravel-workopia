@@ -17,7 +17,7 @@
                     </a>
                     <div class="ml-4 flex space-x-3">
                         <a
-                            href="/edit"
+                            href="{{ route("jobs.edit", $job->id) }}"
                             class="rounded bg-blue-500 px-4 py-2 text-white hover:bg-blue-600"
                         >
                             Edit
