@@ -20,14 +20,22 @@
                             href="{{ route("jobs.edit", $job->id) }}"
                             class="rounded bg-blue-500 px-4 py-2 text-white hover:bg-blue-600"
                         >
+                            <i class="fa-solid fa-pen-to-square"></i>
                             Edit
                         </a>
                         <!-- Delete Form -->
-                        <form method="POST">
+                        <form
+                            method="POST"
+                            action="{{ route("jobs.destroy", $job->id) }}"
+                            onsubmit="return confirm('Are you certain you want to delete this job?')"
+                        >
+                            @csrf
+                            @method("DELETE")
                             <button
                                 type="submit"
-                                class="rounded bg-red-500 px-4 py-2 text-white hover:bg-red-600"
+                                class="cursor-pointer rounded bg-red-500 px-4 py-2 text-white hover:bg-red-600"
                             >
+                                <i class="fa-solid fa-trash"></i>
                                 Delete
                             </button>
                         </form>
