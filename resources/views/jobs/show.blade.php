@@ -107,7 +107,7 @@
             <h3 class="mb-4 text-center text-xl font-bold">Company Info</h3>
             @if ($job->company_logo)
                 <img
-                    src="/images/{{ $job->company_logo }}"
+                    src="/storage/{{ $job->company_logo }}"
                     alt="Ad"
                     class="m-auto mb-4 w-full rounded-lg"
                 />
