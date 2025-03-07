@@ -5,6 +5,7 @@ use App\Http\Controllers\HomeController;
 use Illuminate\Support\Facades\Route;
 use App\Http\Controllers\JobController;
 use App\Http\Controllers\LoginController;
+use App\Http\Controllers\ProfileController;
 use App\Http\Controllers\RegisterController;
 
 Route::get('/', [HomeController::class, 'index'])->name('home');
@@ -27,7 +28,11 @@ Route::middleware('guest')->group(function () {
 // Jobs routes
 Route::resource('jobs', JobController::class);
 
-// Logout routes
+// Logout route
 Route::post('/logout', [LoginController::class, 'logout'])->name('logout');
 
+// Dashboard route
 Route::get('/dashboard', [DashboardController::class, 'index'])->name('dashboard')->middleware('auth');
+
+// Profile route
+Route::put('/profile', [ProfileController::class, 'update'])->name('profile.update')->middleware('auth');
