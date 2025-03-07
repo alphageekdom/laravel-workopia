@@ -52,8 +52,14 @@ class JobController extends Controller {
             'company_website' => 'nullable|url'
         ]);
 
-        // Hardcoded user ID
-        $validatedData['user_id'] = 1;
+        // Ensure user is authenticated before assigning user_id
+        $user = Auth::user();
+
+        if ($user) {
+            $validatedData['user_id'] = $user->id;
+        } else {
+            return redirect()->route('jobs.index')->with('error', 'You must be logged in to create a job listing.');
+        }
 
         // Check for image
         if ($request->hasFile('company_logo')) {
