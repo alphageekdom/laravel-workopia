@@ -15,36 +15,34 @@
                         <i class="fa fa-arrow-alt-circle-left"></i>
                         Back To Listings
                     </a>
-                    @auth
-                        @if (auth()->user()->id == $job->user_id)
-                            <div class="ml-4 flex space-x-3">
-                                <a
-                                    href="{{ route("jobs.edit", $job->id) }}"
-                                    class="rounded bg-blue-500 px-4 py-2 text-white hover:bg-blue-600"
+                    @can("update", $job)
+                        <div class="ml-4 flex space-x-3">
+                            <a
+                                href="{{ route("jobs.edit", $job->id) }}"
+                                class="rounded bg-blue-500 px-4 py-2 text-white hover:bg-blue-600"
+                            >
+                                <i class="fa-solid fa-pen-to-square"></i>
+                                Edit
+                            </a>
+                            <!-- Delete Form -->
+                            <form
+                                method="POST"
+                                action="{{ route("jobs.destroy", $job->id) }}"
+                                onsubmit="return confirm('Are you certain you want to delete this job?')"
+                            >
+                                @csrf
+                                @method("DELETE")
+                                <button
+                                    type="submit"
+                                    class="cursor-pointer rounded bg-red-500 px-4 py-2 text-white hover:bg-red-600"
                                 >
-                                    <i class="fa-solid fa-pen-to-square"></i>
-                                    Edit
-                                </a>
-                                <!-- Delete Form -->
-                                <form
-                                    method="POST"
-                                    action="{{ route("jobs.destroy", $job->id) }}"
-                                    onsubmit="return confirm('Are you certain you want to delete this job?')"
-                                >
-                                    @csrf
-                                    @method("DELETE")
-                                    <button
-                                        type="submit"
-                                        class="cursor-pointer rounded bg-red-500 px-4 py-2 text-white hover:bg-red-600"
-                                    >
-                                        <i class="fa-solid fa-trash"></i>
-                                        Delete
-                                    </button>
-                                </form>
-                                <!-- End Delete Form -->
-                            </div>
-                        @endif
-                    @endauth
+                                    <i class="fa-solid fa-trash"></i>
+                                    Delete
+                                </button>
+                            </form>
+                            <!-- End Delete Form -->
+                        </div>
+                    @endcan
                 </div>
                 <div class="p-4">
                     <h2 class="text-xl font-semibold">{{ $job->title }}</h2>
