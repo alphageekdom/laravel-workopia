@@ -100,6 +100,7 @@
                         Put "Job Application" as the subject of your email and
                         attach your resume.
                     </p>
+
                     <div x-data="{ open: false }" id="applicant-form">
                         <button
                             @click="open = true"
@@ -122,6 +123,7 @@
                                 </h3>
                                 <form
                                     method="POST"
+                                    action="{{ route("applicant.store", $job->id) }}"
                                     enctype="multipart/form-data"
                                 >
                                     @csrf
