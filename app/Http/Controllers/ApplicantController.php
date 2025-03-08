@@ -31,6 +31,7 @@ class ApplicantController extends Controller {
         $application = new Applicant($validatedData);
         $application->job_id = $job->id;
         $application->user_id = auth()->id();
+
         $application->save();
 
         return redirect()->back()->with('success', 'Your application has been submitted');
