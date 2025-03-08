@@ -95,16 +95,92 @@
                     </div>
                 @endif
 
-                <p class="my-5">
-                    Put "Job Application" as the subject of your email and
-                    attach your resume.
-                </p>
-                <a
-                    href="mailto:{{ $job->contact_email }}"
-                    class="block w-full cursor-pointer rounded border bg-indigo-100 px-5 py-2.5 text-center text-base font-medium text-indigo-700 shadow-sm hover:bg-indigo-200"
-                >
-                    Apply Now
-                </a>
+                @auth
+                    <p class="my-5">
+                        Put "Job Application" as the subject of your email and
+                        attach your resume.
+                    </p>
+                    <div x-data="{ open: false }" id="applicant-form">
+                        <button
+                            @click="open = true"
+                            class="block w-full cursor-pointer rounded border bg-indigo-100 px-5 py-2.5 text-center text-base font-medium text-indigo-700 shadow-sm hover:bg-indigo-200"
+                        >
+                            Apply Now
+                        </button>
+
+                        <div
+                            x-cloak
+                            x-show="open"
+                            class="bg-opacity-50 fixed inset-0 flex items-center justify-center bg-gray-900"
+                        >
+                            <div
+                                @click.away="open = false"
+                                class="w-full max-w-md rounded-lg bg-white p-6 shadow-md"
+                            >
+                                <h3 class="mb-4 text-lg font-semibold">
+                                    Apply For {{ $job->title }}
+                                </h3>
+                                <form
+                                    method="POST"
+                                    enctype="multipart/form-data"
+                                >
+                                    @csrf
+                                    <x-inputs.text
+                                        id="full_name"
+                                        name="full_name"
+                                        label="Full Name"
+                                        :required="true"
+                                    />
+                                    <x-inputs.text
+                                        id="contact_phone"
+                                        name="contact_phone"
+                                        label="Contact Phone"
+                                    />
+                                    <x-inputs.text
+                                        id="contact_email"
+                                        name="contact_email"
+                                        label="Contact Email"
+                                        :required="true"
+                                    />
+                                    <x-inputs.text-area
+                                        id="message"
+                                        name="message"
+                                        label="Message"
+                                    />
+                                    <x-inputs.text
+                                        id="location"
+                                        name="location"
+                                        label="Location"
+                                    />
+                                    <x-inputs.file
+                                        id="resume"
+                                        name="resume"
+                                        label="Upload Your Resume (pdf)"
+                                        :required="true"
+                                    />
+
+                                    <button
+                                        type="submit"
+                                        class="rounded-md bg-blue-500 px-4 py-2 text-white hover:bg-blue-600"
+                                    >
+                                        Submit Application
+                                    </button>
+                                    <button
+                                        @click="open = false"
+                                        class="rounded-md bg-gray-300 px-4 py-2 text-black hover:bg-gray-400"
+                                    >
+                                        Cancel
+                                    </button>
+                                </form>
+                            </div>
+                        </div>
+                    </div>
+                @else
+                    <p class="my-5 rounded-xl bg-gray-200 p-3">
+                        <i class="fas fa-info-circle mr-3"></i>
+                        You must be logged in to apply for this job
+                    </p>
+                @endauth
             </div>
 
             <div class="mt-6 rounded-lg bg-white p-6 shadow-md">
