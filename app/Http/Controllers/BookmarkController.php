@@ -31,6 +31,22 @@ class BookmarkController extends Controller {
         // Create new bookmark
         $user->bookmarkedJobs()->attach($job->id);
 
-        return back()->with('success', 'Job bookmarked successfully!');
+        return back()->with('success', 'Job successfully bookmarked !');
+    }
+
+    // @desc    Remove bookmarked job
+    // @route   DELETE /bookmarks/{job}
+    public function destroy(Job $job): RedirectResponse {
+        $user = Auth::user();
+
+        // Check if the job is not bookmarked
+        if (!$user->bookmarkedJobs()->where('job_id', $job->id)->exists()) {
+            return back()->with('error', 'Job is not bookmarked');
+        }
+
+        // Remove bookmark
+        $user->bookmarkedJobs()->detach($job->id);
+
+        return back()->with('success', 'Bookmark successfully removed !');
     }
 }
